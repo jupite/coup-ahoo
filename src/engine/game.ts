@@ -46,8 +46,24 @@ export class Game extends Entity {
     }
 
     public draw(ctx: CanvasRenderingContext2D): void {
-        ctx.fillStyle = '#5d9acf';
+        // 海上背景 - 更深的海洋蓝
+        const gradient = ctx.createLinearGradient(0, 0, 0, 600);
+        gradient.addColorStop(0, '#4a90e2'); // 天空蓝
+        gradient.addColorStop(0.6, '#357abd'); // 中蓝色
+        gradient.addColorStop(1, '#1a365d'); // 深蓝色（海洋深处）
+        ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 800, 600);
+        
+        // 绘制远处的岛屿轮廓
+        ctx.fillStyle = 'rgba(60, 110, 60, 0.6)';
+        ctx.beginPath();
+        ctx.moveTo(-100, 350);
+        ctx.quadraticCurveTo(100, 300, 300, 330);
+        ctx.quadraticCurveTo(500, 310, 700, 340);
+        ctx.quadraticCurveTo(900, 370, 900, 600);
+        ctx.lineTo(-100, 600);
+        ctx.closePath();
+        ctx.fill();
         
         ctx.save();
         ctx.rotate(this.camera.rotation);

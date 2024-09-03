@@ -197,7 +197,6 @@ export class Dude extends Entity {
             dir * 22 - diff * dir,
             diff + yoff
         );
-        // ctx.lineTo(this.p.x - this.air * dir * 5 + dir * 30 - diff * dir, this.p.y + this.air * 18);
         ctx.stroke();
     }
 
@@ -232,7 +231,6 @@ export class Dude extends Entity {
             ctx.strokeStyle = this.cane;
             ctx.lineWidth = 6;
             ctx.stroke();
-            // drawCircle(ctx, { x: 4, y: 0 }, 5, '#000');
         }
         ctx.restore();
     }

@@ -376,6 +376,106 @@ export class Ship extends Flashable {
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
+        
+        // sail patterns
+        ctx.save();
+        ctx.translate(mastPos - 200 - this.animationPhase * 5, -350);
+        ctx.scale(0.8, 0.8);
+        
+        // draw skull and crossbones
+        ctx.fillStyle = '#000';
+        
+        // skull
+        ctx.beginPath();
+        ctx.arc(0, 0, 30, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // eyes
+        ctx.beginPath();
+        ctx.arc(-10, -10, 5, 0, Math.PI * 2);
+        ctx.arc(10, -10, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+        
+        // nose
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(-5, 10);
+        ctx.lineTo(5, 10);
+        ctx.closePath();
+        ctx.fill();
+        
+        // mouth
+        ctx.beginPath();
+        ctx.arc(0, 15, 10, 0, Math.PI);
+        ctx.fill();
+        
+        // crossbones
+        ctx.beginPath();
+        ctx.moveTo(-40, 40);
+        ctx.lineTo(40, -40);
+        ctx.moveTo(-40, -40);
+        ctx.lineTo(40, 40);
+        ctx.lineWidth = 10;
+        ctx.stroke();
+        
+        // random patterns
+        ctx.fillStyle = '#000';
+        const patternCount = 8;
+        for (let i = 0; i < patternCount; i++) {
+            const angle = (i / patternCount) * Math.PI * 2;
+            const distance = 70;
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            
+            // random pattern type
+            const patternType = Math.floor(Math.random() * 3);
+            
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(0.4, 0.4);
+            
+            if (patternType === 0) {
+                // star
+                ctx.beginPath();
+                for (let j = 0; j < 5; j++) {
+                    const starAngle = (j / 5) * Math.PI * 2;
+                    const starX = Math.cos(starAngle) * 15;
+                    const starY = Math.sin(starAngle) * 15;
+                    if (j === 0) {
+                        ctx.moveTo(starX, starY);
+                    } else {
+                        ctx.lineTo(starX, starY);
+                    }
+                }
+                ctx.closePath();
+                ctx.fill();
+            } else if (patternType === 1) {
+                // circle
+                ctx.beginPath();
+                ctx.arc(0, 0, 10, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                // triangle
+                ctx.beginPath();
+                for (let j = 0; j < 3; j++) {
+                    const triAngle = (j / 3) * Math.PI * 2;
+                    const triX = Math.cos(triAngle) * 12;
+                    const triY = Math.sin(triAngle) * 12;
+                    if (j === 0) {
+                        ctx.moveTo(triX, triY);
+                    } else {
+                        ctx.lineTo(triX, triY);
+                    }
+                }
+                ctx.closePath();
+                ctx.fill();
+            }
+            
+            ctx.restore();
+        }
+        
+        ctx.restore();
 
         // small flag
         // ctx.beginPath();
